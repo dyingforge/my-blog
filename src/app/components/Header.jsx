@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Button,
   Navbar,
@@ -12,6 +13,14 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
+import { dark, light } from "@clerk/themes";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 export default function Header() {
   const path = usePathname();
@@ -47,9 +56,16 @@ export default function Header() {
         >
           {theme === "light" ? <FaMoon /> : <FaSun />}
         </Button>
-        <Link href="/sign-in">
-          <Button>Sign In</Button>
-        </Link>
+        <SignedIn>
+          <UserButton
+            appearance={{ baseTheme: theme === light ? light : dark }}
+          />
+        </SignedIn>
+        <SignedOut>
+          <Link href="/sign-in">
+            <Button>Sign In</Button>
+          </Link>
+        </SignedOut>
         <NavbarToggle />
       </div>
       <NavbarCollapse>
