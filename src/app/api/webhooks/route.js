@@ -1,4 +1,4 @@
-import { clerkClient } from "@clerk/nextjs/dist/types/server";
+import { clerkClient } from "@clerk/nextjs";
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
 
 export async function POST(req) {
