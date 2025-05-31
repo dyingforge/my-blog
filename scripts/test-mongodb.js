@@ -1,27 +1,28 @@
-require('dotenv').config({ path: '.env.local' });
-const mongoose = require('mongoose');
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri =
+  "mongodb+srv://wodeyueding1:Wodeyueding1@cluster0.h2xzxzc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-async function testConnection() {
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+
+async function run() {
   try {
-    console.log('Attempting to connect to MongoDB...');
-    
-    if (!process.env.MONGODB_URI) {
-      console.error('MONGODB_URI is not defined in environment variables');
-      process.exit(1);
-    }
-    
-    await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: 'my-blog',
-    });
-    
-    console.log('✅ Successfully connected to MongoDB!');
-    await mongoose.connection.close();
-    console.log('Connection closed.');
-  } catch (error) {
-    console.error('❌ Failed to connect to MongoDB:', error.message);
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log(
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
   } finally {
-    process.exit(0);
+    // Ensures that the client will close when you finish/error
+    await client.close();
   }
 }
-
-testConnection();
+run().catch(console.dir);
