@@ -1,6 +1,6 @@
 import { clerkClient } from "@clerk/nextjs";
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
-import { createOrupdateUser, deleteUser } from "../../../lib/actions/user.js";
+import { createOrUpdateUser, deleteUser } from "../../../lib/actions/user.js";
 
 export async function POST(req) {
   try {
@@ -21,7 +21,7 @@ export async function POST(req) {
         evt?.data;
 
       try {
-        const user = await createOrupdateUser(
+        const user = await createOrUpdateUser(
           id,
           first_name,
           last_name,
