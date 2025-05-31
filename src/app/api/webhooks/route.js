@@ -1,4 +1,4 @@
-import { clerkClient } from "@clerk/nextjs";
+import { clerkClient } from "@clerk/nextjs/server";
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
 import { createOrUpdateUser, deleteUser } from "../../../lib/actions/user.js";
 
@@ -34,7 +34,7 @@ export async function POST(req) {
           try {
             await clerkClient.users.updateUserMetadata(id, {
               publicMetadata: {
-                userMongoId: user._id,
+                userMongoId: user._id.toString(),
                 isAdmin: user.isAdmin,
               },
             });
