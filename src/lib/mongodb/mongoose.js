@@ -3,19 +3,20 @@ import mongoose from "mongoose";
 let initialized = false;
 
 export const connect = async () => {
+  mongoose.set("strictQuery", true);
   if (initialized) {
+    console.log("Already connected to MongoDB");
     return;
   }
-
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: "Project 0",
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    console.log("Connected to MongoDB");
     initialized = true;
-    console.log("MongoDB connected successfully");
   } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw error;
+    console.log("Error connecting to MongoDB:", error);
   }
 };
