@@ -30,7 +30,7 @@ export async function POST(req) {
           username
         );
 
-        if (user && eventType === "user.updated") {
+        if (user && eventType === "user.created") {
           try {
             await clerkClient.users.updateUserMetadata(id, {
               publicMetadata: {
@@ -38,7 +38,9 @@ export async function POST(req) {
                 isAdmin: user.isAdmin,
               },
             });
-          } catch (error) {}
+          } catch (error) {
+            console.log("Error updating user metadata:", error);
+          }
         }
         console.log("User created or updated:", user);
       } catch (error) {
