@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    clerk: {
+    clerkId: {
       type: String,
       required: true,
       unique: true,
@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+
     firstName: {
       type: String,
       required: true,
@@ -21,21 +22,24 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userName: {
+    username: {
       type: String,
       required: true,
       unique: true,
     },
+
     profilePicture: {
       type: String,
-      required: null,
+      required: false,
     },
+
     isAdmin: {
       type: Boolean,
       default: false,
     },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
+
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 export default User;
