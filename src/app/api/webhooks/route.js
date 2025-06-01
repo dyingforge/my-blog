@@ -29,12 +29,12 @@ export async function POST(req) {
           email_addresses,
           username
         );
-
         if (user && eventType === "user.created") {
           try {
-            await clerkClient.users.updateUserMetadata(id, {
+            console.log("Updating user metadata in Clerk...");
+            await clerkClient.users.updateUser(id, {
               publicMetadata: {
-                userMongoId: user._id.toString(),
+                userMongoId: user._id,
                 isAdmin: user.isAdmin,
               },
             });
