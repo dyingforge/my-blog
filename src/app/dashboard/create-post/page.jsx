@@ -27,6 +27,8 @@ export default function CreatePostPage() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [PublishError, setPublishError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const router = useRouter();
   console.log(formData);
 
@@ -66,6 +68,9 @@ export default function CreatePostPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setPublishError(null);
     try {
       const res = await fetch("/api/post/create", {
         method: "POST",
@@ -88,6 +93,8 @@ export default function CreatePostPage() {
       }
     } catch (error) {
       setPublishError("Something went wrong");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
