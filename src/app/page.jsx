@@ -36,7 +36,7 @@ export default async function Home() {
           href="/search"
           className="text-xs sm:text-sm text-teal-500 font-bold hover:underline"
         >
-          View all posts
+          查看所有的推文
         </Link>
       </div>
       <div className="p-3 bg-amber-100 dark:bg-slate-700">
@@ -48,7 +48,7 @@ export default async function Home() {
           href={"/search?category=null"}
           className="text-lg text-teal-500 hover:underline text-center"
         >
-          View all posts
+          查看所有的推文
         </Link>
       </div>
     </div>

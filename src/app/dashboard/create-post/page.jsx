@@ -2,7 +2,6 @@
 
 import { useUser } from "@clerk/nextjs";
 import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
-import { set } from "mongoose";
 import {
   getDownloadURL,
   getStorage,
